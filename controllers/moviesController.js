@@ -1,14 +1,5 @@
-import Movie from '../models/movie.js';
-
-async function getAllMovies(_req, res, next) {
-  try {
-    const movies = await Movie.find();
-    return res.status(200).json(movies);
-  } catch (err) {
-    next(err);
-  }
+// How we get the movies (from database or otherwise)
+// is the responsibility of the controller
+export const getAllMovies = (request, response) => {
+  return response.send(['Die Hard', 'Interstellar', 'Nomadland'])
 }
-
-export default {
-  getAllMovies,
-};

@@ -1,8 +1,11 @@
-import express from 'express';
-import moviesController from '../controllers/moviesController.js';
+import express from 'express'
+import { getAllMovies } from '../controllers/moviesController.js'
 
-const Router = express.Router();
+// Router is reponsible for which routes are answered by which controllers
+const router = express.Router()
 
-Router.route('/movies').get(moviesController.getAllMovies);
+// base URL of this is determined by api
+// here we handle everything that comes after that base
+router.route('/movies').get(getAllMovies)
 
-export default Router;
+export default router
