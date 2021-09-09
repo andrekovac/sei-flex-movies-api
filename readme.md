@@ -25,3 +25,13 @@ Once the server is running and successfully connected to the database, you will 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
 # Lesson 2 Instructions:
+
+- move the port to a new config/environment.js file and explain that this file will hold all environment variables as they grow
+- Students to install mongo db as per the instructions above
+- add mongoose and mongoose-unique-validator to the project
+- update package.json to use nodemon (and explain nodemon)
+- Add a mongo db dbUri variable to the environment.js - explain that locally this will be the name of our database
+- create a db/helpers.js and write the connectDb function
+- create seed functionality (db/seed.js and db/moviesSeedData.js - add node db/seed.js to package.json)
+- update the moviesController
+- test in insomnia/postman

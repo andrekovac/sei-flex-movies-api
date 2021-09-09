@@ -7,7 +7,8 @@ const app = express()
 
 app.use(express.json())
 app.use('/api', router)
-;(async function startServer() {
+
+async function startServer() {
   try {
     await connectDb()
     console.log('🤖 Mongoose is connected')
@@ -15,4 +16,6 @@ app.use('/api', router)
   } catch (err) {
     console.log('🤖 Oh no something went wrong')
   }
-})()
+}
+
+startServer()
