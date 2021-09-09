@@ -10,10 +10,16 @@
     "sei",
     "ga"
   ],
-  "type": "module",
-  "author": "Robin James Kerrison",
-  "license": "MIT",
+  "scripts": {
+    "start:server": "npx nodemon server.js",
+    "seed": "node db/seed.js"
+  },
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "mongoose": "^5.13.6",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "type": "module",
+  "author": "Tristan Hall",
+  "license": "MIT"
 }
