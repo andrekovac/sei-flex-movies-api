@@ -1,6 +1,6 @@
 ## SEI FLEX MOVIES API
 
-To run the api, firstly ensure MongoDB is installed and running locally. To see how to do this [follow these instructions]('https://docs.mongodb.com/manual/installation/)
+To run the api, firstly ensure MongoDB is installed and running locally. To see how to do this [follow these instructions]('https://docs.mongodb.com/manual/installation/')
 
 Once the database is running locally:
 
