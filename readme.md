@@ -16,11 +16,12 @@ Once the database is running locally:
 2. Seed the database - `npm run seed`
 3. Start the server - `npm run start:server`
 
-<em>It may help to have nodemon installed globally on your machine</em>
+_It may help to have nodemon installed globally on your machine._
 
 `npm i -g nodemon`
 
-Once the server is running and successfully connected to the database, you will be able to test making requests to the api using [postman]('https://www.postman.com/downloads/).
+Once the server is running and successfully connected to the database, you will be able to test making requests to the api using Postman.
+Install via the [Postman download page]('https://www.postman.com/downloads/), or through homebrew with `brew install postman`.
 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
