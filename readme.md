@@ -24,14 +24,23 @@ Once the server is running and successfully connected to the database, you will 
 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
-# Lesson 2 Instructions:
+## Lesson 5 Instructions:
 
-- move the port to a new config/environment.js file and explain that this file will hold all environment variables as they grow
-- Students to install mongo db as per the instructions above
-- add mongoose and mongoose-unique-validator to the project
-- update package.json to use nodemon (and explain nodemon)
-- Add a mongo db dbUri variable to the environment.js - explain that locally this will be the name of our database
-- create a db/helpers.js and write the connectDb function
-- create seed functionality (db/seed.js and db/moviesSeedData.js - add node db/seed.js to package.json)
-- update the moviesController
-- test in insomnia/postman
+1. Add a new file, `actor.js`
+2. Define in it a new schema, `actorSchema`, and create a mongoose object
+3. Reference `Movie` from `Actor` and vice-versa
+4. Create an `actorsController`
+   1. Allow for creating an actor with movie ids
+   2. Add the actor to the movies when creating
+   3. Allow for updating an actor, including with movie ids
+   4. Add the actor to the new movies when updating
+   5. Remove the actor from the removed movies when updating
+5. Add routes for all `actorsController` methods
+6. Add a route to get all actors for a movie with full details
+7. Update `moviesController`
+   1. Allow for creating a movie with actor ids
+   2. Add the movie to the actors when creating
+   3. Allow for updating a movie, including with actor ids
+   4. Add the movie to the new actors when updating
+   5. Remove the movie from the removed actors when updating
+8. Add a route to get all movies for an actor with full details

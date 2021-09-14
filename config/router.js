@@ -1,6 +1,7 @@
 import express from 'express'
 import commentsController from '../controllers/commentsController.js'
 import moviesController from '../controllers/moviesController.js'
+import actorsController from '../controllers/actorsController.js'
 
 // Router is reponsible for which routes are answered by which controllers
 const router = express.Router()
@@ -24,5 +25,18 @@ router
   .route('/movies/:id/comments/:commentId')
   .delete(commentsController.deleteComment)
   .put(commentsController.updateComment)
+
+router
+  .route('/actors')
+  .get(actorsController.getAllActors)
+  .post(actorsController.createActor)
+
+router
+  .route('/actors/:id')
+  .get(actorsController.getActor)
+  .delete(actorsController.deleteActor)
+  .put(actorsController.updateActor)
+
+router.route('/actors/:id/movies').get(actorsController.getAllMoviesForActor)
 
 export default router
