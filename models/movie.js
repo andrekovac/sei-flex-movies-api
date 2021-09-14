@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import mongooseUniqueValidator from 'mongoose-unique-validator';
+import mongoose from 'mongoose'
+import mongooseUniqueValidator from 'mongoose-unique-validator'
 
 const commentSchema = new mongoose.Schema(
   {
@@ -9,17 +9,18 @@ const commentSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
 const movieSchema = new mongoose.Schema({
   title: String,
   description: String,
   releaseYear: Number,
+  genre: String,
   comments: [commentSchema],
-});
+})
 
-movieSchema.plugin(mongooseUniqueValidator);
+movieSchema.plugin(mongooseUniqueValidator)
 
-const Movie = mongoose.model('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema)
 
-export default Movie;
+export default Movie

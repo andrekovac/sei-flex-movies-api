@@ -1,6 +1,14 @@
 ## SEI FLEX MOVIES API
 
-To run the api, firstly ensure MongoDB is installed and running locally. To see how to do this [follow these instructions]('https://docs.mongodb.com/manual/installation/)
+To run the api, firstly ensure MongoDB is installed and running locally. To see how to do this [follow these instructions]('https://docs.mongodb.com/manual/installation/')
+
+# Mongo DB and Aliases
+
+add an alias to the .zshrc file to be able to create shortcuts for commands
+
+to start mongo: `alias startmongo="brew services start mongodb-community@5.0"`
+
+to stop mongo: `alias killmongo="brew services stop mongodb-community@5.0"`
 
 Once the database is running locally:
 
@@ -16,22 +24,14 @@ Once the server is running and successfully connected to the database, you will 
 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
-1. Add a function to the moviesController to create a new movie
-2. Add a post handler to /movies in the router (.post(moviesController.createMovie))
-3. Test the POST request in insomnia - at this point they should know how to create environment variables in insomnia and be able to create the new request. Add the body as JSON and you'll be able to create a new movie. Show them that it has created by performing the get all movies request again to show that the new movie has been added to the database
+# Lesson 2 Instructions:
 
-4. Add a function to get a single movie by id to the moviesController
-5. add the new route to the router for movies/:id
-6. test the request in Insomnia
-
-7. Add a function to delete a movie by id to the moviesController
-8. add the delete handler to the /movies/:id route in the router
-9. test the delete request in Insomnia
-10. Perform the get all movies request to see that the movie should no longer be in the database
-
-11. Add a function to edit a movie by id to the moviesController
-12. add the put handler to the /movies/:id route in the router
-13. test the put request in Insomnia
-14. Perform the get all movies request to see that the movie should be updated in the database
-
-15. (IF you have time) - help students set up postman - they are aware that it is more commonly used in the industry than Insomnia so it would be beneficial to show them how to set up environments and environment variables in postman
+- move the port to a new config/environment.js file and explain that this file will hold all environment variables as they grow
+- Students to install mongo db as per the instructions above
+- add mongoose and mongoose-unique-validator to the project
+- update package.json to use nodemon (and explain nodemon)
+- Add a mongo db dbUri variable to the environment.js - explain that locally this will be the name of our database
+- create a db/helpers.js and write the connectDb function
+- create seed functionality (db/seed.js and db/moviesSeedData.js - add node db/seed.js to package.json)
+- update the moviesController
+- test in insomnia/postman

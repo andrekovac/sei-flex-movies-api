@@ -1,15 +1,20 @@
 import express from 'express'
 import moviesController from '../controllers/moviesController.js'
 
-const Router = express.Router()
+// Router is reponsible for which routes are answered by which controllers
+const router = express.Router()
 
-Router.route('/movies')
+// base URL of this is determined by api
+// here we handle everything that comes after that base
+router
+  .route('/movies')
   .get(moviesController.getAllMovies)
   .post(moviesController.createMovie)
 
-Router.route('/movies/:id')
+router
+  .route('/movies/:id')
   .get(moviesController.getMovie)
-  .put(moviesController.updateMovie)
   .delete(moviesController.deleteMovie)
+  .put(moviesController.updateMovie)
 
-export default Router
+export default router

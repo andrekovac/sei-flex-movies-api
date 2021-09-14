@@ -12,54 +12,51 @@ async function getAllMovies(_req, res, next) {
 async function createMovie(req, res, next) {
   try {
     const newMovie = await Movie.create(req.body)
-    res.status(201).send(newMovie)
+    return res.status(201).json(newMovie)
   } catch (err) {
     next(err)
   }
 }
 
 async function getMovie(req, res, next) {
-  const { id } = req.params
+  const id = req.params.id
 
   try {
+    // We want to find the movie with that id
+    // find by id
     const movie = await Movie.findById(id)
-    res.send(movie)
+    return res.status(200).json(movie)
   } catch (err) {
     next(err)
   }
 }
 
 async function deleteMovie(req, res, next) {
-  const { id } = req.params
+  const id = req.params.id
 
   try {
-    const movieToDelete = await Movie.findById(id)
-    await movieToDelete.deleteOne()
-    res.send(movieToDelete)
+    // We want to find the movie with that id
+    // find by id
+    const movie = await Movie.findByIdAndDelete(id)
+
+    return res.status(200).json(movie)
   } catch (err) {
     next(err)
   }
 }
 
 async function updateMovie(req, res, next) {
-  const { id } = req.params
-  const { body } = req
-
-  console.log(body)
-
   try {
-    const movieToUpdate = await Movie.findById(id)
-    if (!movieToUpdate) {
-      return res.send({ message: 'No movie found' })
-    }
-    // Set new fields
-    movieToUpdate.set(body)
-    // Save
-    movieToUpdate.save()
-
-    res.send(movieToUpdate)
+    // We want to find the movie with that id
+    // find by id
+    const id = req.params.id
+    //const movie = await Movie.findByIdAndUpdate(id, req.body, { new: true })
+    const movie = await Movie.findById(id)
+    movie.set(req.body)
+    movie.save()
+    return res.status(200).json(movie)
   } catch (err) {
-    next()
+    next(err)
   }
 }
 

@@ -1,25 +1,25 @@
 {
-  "name": "sei-flex-movies-api",
+  "name": "movies-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movies API",
   "main": "server.js",
+  "keywords": [
+    "movies",
+    "api",
+    "express",
+    "sei",
+    "ga"
+  ],
   "scripts": {
     "start:server": "npx nodemon server.js",
     "seed": "node db/seed.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.13.6",
     "mongoose-unique-validator": "^2.0.3"
   },
   "type": "module",
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0"
-  },
-  "engines": {
-    "node": ">=15"
-  }
+  "author": "Tristan Hall",
+  "license": "MIT"
 }
