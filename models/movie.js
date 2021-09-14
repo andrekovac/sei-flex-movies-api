@@ -15,6 +15,7 @@ const movieSchema = new mongoose.Schema({
   title: String,
   description: String,
   releaseYear: Number,
+  genre: String,
   comments: [commentSchema],
 })
 
