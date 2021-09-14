@@ -49,41 +49,31 @@ async function updateComment(req, res, next) {
   }
 }
 
-// async function removeComment(req, res, next) {
-//   const currentUser = req.currentUser
-//   const { commentId, pokemonId } = req.params
+async function deleteComment(req, res, next) {
+  const { commentId, id } = req.params
 
-//   try {
-//     // ! 1) Get the pokemon whose comment this is about
-//     const pokemon = await Pokemon.findById(pokemonId).populate('comments.user')
+  try {
+    const movie = await Movie.findById(id)
+    // .populate('comments.user')
 
-//     if (!pokemon) {
-//       return res.status(404).send({ message: 'Not found' })
-//     }
+    if (!movie) {
+      return res.status(404).send({ message: 'Not found' })
+    }
 
-//     // ! 2) Grab the comment from my comments which I need to update
-//     // ? .id is a mongoose method for grabbing a document out of an array of documents.
-//     const comment = pokemon.comments.id(commentId)
+    const comment = movie.comments.id(commentId)
 
-//     // ! 3) Do my permissions check: Is the comment's ID the SAME as the current users id?
-//     if (!comment.user.equals(currentUser._id)) {
-//       return res.status(401).send({ message: 'Unauthorized' })
-//     }
+    comment.remove()
 
-//     // ! 4) Delete the comment
-//     comment.remove()
+    const savedMovie = await movie.save()
 
-//     // ! 5) Final step, save pokemon
-//     const savedPokemon = await pokemon.save()
-
-//     res.send(savedPokemon)
-//   } catch (err) {
-//     next(err)
-//   }
-// }
+    res.send(savedMovie)
+  } catch (err) {
+    next(err)
+  }
+}
 
 export default {
   createComment,
   updateComment,
-  // removeComment,
+  deleteComment,
 }

@@ -22,3 +22,6 @@ Try sending a request to `http://localhost:4000/api/movies` and you should see d
 4. remind students about the `commentSchema` that we created when we wrote the movieSchema - we are now going to create operations to use this scema and add comments to our movies
 5. Add a route for creating a comment to the router
 6. Test the new route in postman/insomnia (depending if they got postman set up in the previous lesson). When you test the route, show that the mongoose schema handles the validation by first creating a comment that has no rating. You will get an error in insomnia/postman. Add the rating (required field in the model) and the error goes away).
+7. Add a function to the commentController to delete a comment.
+8. Add the delete route to the router
+9. Test the delete comment route in insomnia/postman

@@ -16,9 +16,8 @@ Router.route('/movies/:id')
 // Route for creating a comment
 Router.route('/movies/:id/comment').post(commentController.createComment)
 
-Router.route('/movies/:id/comment/:commentId').put(
-  commentController.updateComment
-)
-// .delete(commentController.deleteComment)
+Router.route('/movies/:id/comment/:commentId')
+  .put(commentController.updateComment)
+  .delete(commentController.deleteComment)
 
 export default Router
