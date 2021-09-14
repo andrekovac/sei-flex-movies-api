@@ -1,4 +1,5 @@
 import express from 'express'
+import commentsController from '../controllers/commentsController.js'
 import moviesController from '../controllers/moviesController.js'
 
 // Router is reponsible for which routes are answered by which controllers
@@ -16,5 +17,12 @@ router
   .get(moviesController.getMovie)
   .delete(moviesController.deleteMovie)
   .put(moviesController.updateMovie)
+
+router.route('/movies/:id/comments').post(commentsController.createComment)
+
+router
+  .route('/movies/:id/comments/:commentId')
+  .delete(commentsController.deleteComment)
+  .put(commentsController.updateComment)
 
 export default router

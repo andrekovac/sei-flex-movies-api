@@ -25,6 +25,11 @@ async function getMovie(req, res, next) {
     // We want to find the movie with that id
     // find by id
     const movie = await Movie.findById(id)
+
+    if (!movie) {
+      return res.status(404).send({ message: 'Movie does not exist' })
+    }
+
     return res.status(200).json(movie)
   } catch (err) {
     next(err)
@@ -39,6 +44,10 @@ async function deleteMovie(req, res, next) {
     // find by id
     const movie = await Movie.findByIdAndDelete(id)
 
+    if (!movie) {
+      return res.status(404).send({ message: 'Movie does not exist' })
+    }
+
     return res.status(200).json(movie)
   } catch (err) {
     next(err)
@@ -52,6 +61,11 @@ async function updateMovie(req, res, next) {
     const id = req.params.id
     //const movie = await Movie.findByIdAndUpdate(id, req.body, { new: true })
     const movie = await Movie.findById(id)
+
+    if (!movie) {
+      return res.status(404).send({ message: 'Movie does not exist' })
+    }
+
     movie.set(req.body)
     movie.save()
     return res.status(200).json(movie)

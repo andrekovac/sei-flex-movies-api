@@ -12,7 +12,7 @@ const commentSchema = new mongoose.Schema(
 )
 
 const movieSchema = new mongoose.Schema({
-  title: String,
+  title: { type: String, required: true },
   description: String,
   releaseYear: Number,
   genre: String,
