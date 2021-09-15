@@ -38,5 +38,6 @@ router
   .put(actorsController.updateActor)
 
 router.route('/actors/:id/movies').get(actorsController.getAllMoviesForActor)
+router.route('/movies/:id/actors').get(moviesController.getAllActorsForMovie)
 
 export default router

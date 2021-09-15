@@ -66,6 +66,13 @@ async function deleteActor(req, res, next) {
       return res.status(404).send({ message: 'Actor does not exist' })
     }
 
+    const moviesToRemove = actor.movies.map((x) => x.toString())
+
+    await Movie.updateMany(
+      { _id: moviesToRemove },
+      { $pull: { actors: actor._id } }
+    )
+
     return res.status(200).json(actor)
   } catch (err) {
     next(err)
@@ -91,11 +98,6 @@ async function updateActor(req, res, next) {
 
     actor.set(req.body)
     const savedActor = await actor.save()
-
-    console.log({
-      removedMovies,
-      addedMovies,
-    })
 
     await Movie.updateMany(
       { _id: removedMovies },
