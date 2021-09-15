@@ -36,11 +36,11 @@ Try sending a request to `http://localhost:4000/api/movies` and you should see d
    4. Add the actor to the new movies when updating
    5. Remove the actor from the removed movies when updating
 5. Add routes for all `actorsController` methods
-6. Add a route to get all actors for a movie with full details
+6. Add a route to get all movies for an actor with full details
 7. Update `moviesController`
    1. Allow for creating a movie with actor ids
    2. Add the movie to the actors when creating
    3. Allow for updating a movie, including with actor ids
    4. Add the movie to the new actors when updating
    5. Remove the movie from the removed actors when updating
-8. Add a route to get all movies for an actor with full details
+8. Add a route to get all actors for a movie with full details
