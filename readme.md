@@ -24,23 +24,12 @@ Once the server is running and successfully connected to the database, you will 
 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
-## Lesson 5 Instructions:
+## Lesson 6 Instructions:
 
-1. Add a new file, `actor.js`
-2. Define in it a new schema, `actorSchema`, and create a mongoose object
-3. Reference `Movie` from `Actor` and vice-versa
-4. Create an `actorsController`
-   1. Allow for creating an actor with movie ids
-   2. Add the actor to the movies when creating
-   3. Allow for updating an actor, including with movie ids - removedAdded function in helpers
-   4. Add the actor to the new movies when updating
-   5. Remove the actor from the removed movies when updating
-5. Add routes for all `actorsController` methods
-6. Add a route to get all movies for an actor with full details
-7. Update `moviesController`
-   1. Allow for creating a movie with actor ids
-   2. Add the movie to the actors when creating
-   3. Allow for updating a movie, including with actor ids
-   4. Add the movie to the new actors when updating
-   5. Remove the movie from the removed actors when updating
-8. Add a route to get all actors for a movie with full details
+1. add secret to environment.js (we will update this to use environment variables later)
+2. create User model
+3. create userController
+4. Deep dive into jwt tokens
+5. create secureRoute
+6. update router
+7. Test in insomnia/postman

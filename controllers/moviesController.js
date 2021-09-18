@@ -1,4 +1,6 @@
 import Movie from '../models/movie.js'
+import Actor from '../models/actor.js'
+import { removedAdded } from './helpers.js'
 
 async function getAllMovies(_req, res, next) {
   try {
