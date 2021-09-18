@@ -32,7 +32,7 @@ Try sending a request to `http://localhost:4000/api/movies` and you should see d
 4. Create an `actorsController`
    1. Allow for creating an actor with movie ids
    2. Add the actor to the movies when creating
-   3. Allow for updating an actor, including with movie ids
+   3. Allow for updating an actor, including with movie ids - removedAdded function in helpers
    4. Add the actor to the new movies when updating
    5. Remove the actor from the removed movies when updating
 5. Add routes for all `actorsController` methods
