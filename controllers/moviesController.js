@@ -22,6 +22,8 @@ async function getAllActorsForMovie(req, res, next) {
 }
 
 async function createMovie(req, res, next) {
+  req.body.createdBy = req.currentUser
+
   try {
     const newMovie = await Movie.create(req.body)
 
@@ -66,6 +68,15 @@ async function deleteMovie(req, res, next) {
       return res.status(404).send({ message: 'Movie does not exist' })
     }
 
+    // ! 2) Comparing the 2 id's with each other. If it's not the same user, dont do it!!!
+    // ? equals is a method on the MONGOOSE OBJECT ID, that lets us compare two id's
+    // ? I can't just use !== because these are two objects, not two strings.
+    if (!req.currentUser._id.equals(movie.createdBy)) {
+      return res
+        .status(401)
+        .send({ message: 'You are not the owner of this movie' })
+    }
+
     const actorsToRemove = movie.actors.map((x) => x.toString())
 
     await Actor.updateMany(
@@ -89,6 +100,13 @@ async function updateMovie(req, res, next) {
 
     if (!movie) {
       return res.status(404).send({ message: 'Movie does not exist' })
+    }
+
+    // ! If this isn't the user who created the movie originally, stop
+    if (!movie.createdBy.equals(req.currentUser._id)) {
+      return res.status(401).send({
+        message: 'You are not the owner of this movie. You can not update it.',
+      })
     }
 
     const [removedActors, addedActors] = removedAdded(

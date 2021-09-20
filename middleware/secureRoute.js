@@ -17,9 +17,6 @@ export default async function secureRoute(req, res, next) {
     // ? Remove the 'Bearer ' part from the token
     const token = authToken.replace('Bearer ', '')
 
-    console.log('🤖' + ' ' + authToken)
-    console.log('🤖' + ' ' + token)
-
     // ! 2) Verifying my token.
     // ? The async (err, data) is a callback JWT library gives me.
     jwt.verify(token, secret, async (err, data) => {
