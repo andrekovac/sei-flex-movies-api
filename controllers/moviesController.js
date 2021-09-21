@@ -23,7 +23,12 @@ async function getAllActorsForMovie(req, res, next) {
 
 async function createMovie(req, res, next) {
   try {
-    const newMovie = await Movie.create(req.body)
+    const newMovie = await Movie.create({
+      // for security, req.currentUser needs to
+      // be used after the spread
+      ...req.body,
+      createdBy: req.currentUser,
+    })
 
     await Actor.updateMany(
       { _id: newMovie.actors },
@@ -60,10 +65,15 @@ async function deleteMovie(req, res, next) {
   try {
     // We want to find the movie with that id
     // find by id
-    const movie = await Movie.findByIdAndDelete(id)
+    const movie = await Movie.findById(id)
 
     if (!movie) {
       return res.status(404).send({ message: 'Movie does not exist' })
+    }
+
+    // we want to ask mongoose if createdBy and currentUser match
+    if (!movie.createdBy.equals(req.currentUser._id)) {
+      return res.status(401).send({ message: 'Unauthorized action' })
     }
 
     const actorsToRemove = movie.actors.map((x) => x.toString())
@@ -72,6 +82,7 @@ async function deleteMovie(req, res, next) {
       { _id: actorsToRemove },
       { $pull: { movies: movie._id } }
     )
+    await movie.remove()
 
     return res.status(200).json(movie)
   } catch (err) {

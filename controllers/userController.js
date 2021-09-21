@@ -1,5 +1,6 @@
-import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
+
+import User from '../models/user.js'
 import { secret } from '../config/environment.js'
 
 // ! Added a new controller function to create a user
