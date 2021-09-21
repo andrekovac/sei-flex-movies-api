@@ -1,4 +1,3 @@
-import Movie from '../models/movie.js'
 import User from '../models/user.js'
 import { connectDb, disconnectDb } from './helpers.js'
 

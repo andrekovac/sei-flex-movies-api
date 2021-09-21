@@ -26,7 +26,7 @@ async function cleanupComments() {
         if (createdByUser) {
           console.log('movie', movie, 'created by', createdByUser)
           // in this case, there is already a valid user
-          return
+          continue
         }
       }
       movie.set({ createdBy: user._id })
