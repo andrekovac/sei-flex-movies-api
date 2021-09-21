@@ -12,7 +12,9 @@
   ],
   "scripts": {
     "start:server": "npx nodemon server.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "create:community": "node db/createCommunityUser.js",
+    "cleanup:comments": "node db/cleanupComments.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
