@@ -11,7 +11,10 @@ async function createComment(req, res, next) {
       return res.status(404).send({ message: 'Movie does not exist' })
     }
 
-    const newComment = req.body
+    const newComment = {
+      ...req.body,
+      createdBy: req.currentUser,
+    }
 
     movie.comments.push(newComment)
     const savedMovie = await movie.save()
@@ -38,6 +41,10 @@ async function deleteComment(req, res, next) {
       return res.status(404).send({ message: 'Comment does not exist' })
     }
 
+    if (!comment.createdBy.equals(req.currentUser._id)) {
+      return res.status(401).send({ message: 'Unauthorized action' })
+    }
+
     comment.remove()
 
     const savedMovie = await movie.save()
@@ -61,6 +68,10 @@ async function updateComment(req, res, next) {
     const comment = movie.comments.id(commentId)
     if (!comment) {
       return res.status(404).send({ message: 'Comment does not exist' })
+    }
+
+    if (!comment.createdBy.equals(req.currentUser._id)) {
+      return res.status(401).send({ message: 'Unauthorized action' })
     }
 
     comment.set(req.body)

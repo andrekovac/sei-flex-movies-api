@@ -102,6 +102,11 @@ async function updateMovie(req, res, next) {
       return res.status(404).send({ message: 'Movie does not exist' })
     }
 
+    // we want to ask mongoose if createdBy and currentUser match
+    if (!movie.createdBy.equals(req.currentUser._id)) {
+      return res.status(401).send({ message: 'Unauthorized action' })
+    }
+
     const [removedActors, addedActors] = removedAdded(
       movie.actors.map((x) => x.toString()),
       req.body.actors
