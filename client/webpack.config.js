@@ -18,7 +18,7 @@ module.exports = (webpackEnv) => {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve('.'),
+      path: path.resolve('./build'),
       ...publicPath,
     },
     module: {
