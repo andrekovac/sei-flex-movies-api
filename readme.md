@@ -24,12 +24,11 @@ Once the server is running and successfully connected to the database, you will 
 
 Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
 
-## Lesson 6 Instructions:
+## Lesson 9 Instructions:
 
-1. add secret to environment.js (we will update this to use environment variables later)
-2. create User model
-3. create userController
-4. Deep dive into jwt tokens
-5. create secureRoute
-6. update router
-7. Test in insomnia/postman
+1. Build the home page with them to show them how to fetch data locally
+2. Show them wireframing tools - Balsamiq
+3. Set up a trello board
+4. Put them in groups
+5. One person should push their classwork into a git repo and all of them should pull it down
+6. Get them to write tickets and work together to start creating a fontend
