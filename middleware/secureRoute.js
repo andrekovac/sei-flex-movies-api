@@ -43,6 +43,7 @@ export default async function secureRoute(req, res, next) {
       // ? Stick the current user on my request, so that in my controllers
       // ? I can use it to do object level permissions later.
       req.currentUser = user
+      req.isUserAdmin = user.isAdmin
 
       // ! 5) Call next to finish
       next()

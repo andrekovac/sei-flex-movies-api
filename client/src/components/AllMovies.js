@@ -4,7 +4,7 @@ import { getAllMovies } from '../api/movies'
 import reelSrc from '../images/reel.jpg'
 import Movie from './Movie'
 
-const Home = () => {
+const AllMovies = () => {
   const [movies, setMovies] = useState([])
   const [availableGenres, setAvailableGenres] = useState([])
   const [visibleGenre, setVisibleGenre] = useState(null)
@@ -18,15 +18,6 @@ const Home = () => {
     setAvailableGenres([...new Set(genres)])
   }, [movies])
 
-  const moviesByGenre = movies.reduce((dictionary, currentMovie) => {
-    if (!dictionary[currentMovie.genre]) {
-      dictionary[currentMovie.genre] = []
-    }
-
-    dictionary[currentMovie.genre].push(currentMovie)
-    return dictionary
-  }, {})
-
   return (
     <>
       <h1>MOVIES</h1>
@@ -37,20 +28,18 @@ const Home = () => {
         <button onClick={() => setVisibleGenre(null)}>Reset</button>
       </div>
       <img src={reelSrc} alt="a movie reel" />
-      {Object.entries(moviesByGenre)
-        .filter(([genre]) => !visibleGenre || genre === visibleGenre)
-        .map(([genre, movieList]) => (
-          <section key={genre} className="tile wrap is-parent is-50">
-            <h2>{genre}</h2>
-            <div>
-              {movieList.map((movie) => (
-                <Movie key={movie._id} {...movie} />
-              ))}
-            </div>
-          </section>
-        ))}
+      <section className="tile wrap is-parent is-50">
+        <h2>All movies</h2>
+        <div>
+          {movies
+            .filter((m) => !visibleGenre || m.genre === visibleGenre)
+            .map((movie) => (
+              <Movie key={movie._id} {...movie} />
+            ))}
+        </div>
+      </section>
     </>
   )
 }
 
-export default Home
+export default AllMovies

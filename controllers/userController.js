@@ -7,7 +7,52 @@ import { secret } from '../config/environment.js'
 async function registerUser(req, res, next) {
   const body = req.body
   try {
-    const user = await User.create(body)
+    const user = await User.create({ ...body, isAdmin: false })
+    res.status(201).send(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function promoteUser(req, res, next) {
+  const body = req.body
+  try {
+    if (!req.isUserAdmin) {
+      return res.status(401).send({ message: 'Only admins can create admins' })
+    }
+
+    const user = await User.findOne({ _id: body.userId })
+    user.set({ isAdmin: true })
+    user.save()
+    res.status(201).send(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function getAllUsers(req, res, next) {
+  try {
+    if (!req.isUserAdmin) {
+      return res.status(401).send({ message: 'Only admins can create admins' })
+    }
+
+    const users = await User.find()
+    res.status(201).send(users)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function demoteUser(req, res, next) {
+  const body = req.body
+  try {
+    if (!req.isUserAdmin) {
+      return res.status(401).send({ message: 'Only admins can create admins' })
+    }
+
+    const user = await User.findOne({ _id: body.userId })
+    user.set({ isAdmin: false })
+    user.save()
     res.status(201).send(user)
   } catch (err) {
     next(err)
@@ -43,4 +88,7 @@ async function loginUser(req, res, next) {
 export default {
   registerUser,
   loginUser,
+  promoteUser,
+  demoteUser,
+  getAllUsers,
 }

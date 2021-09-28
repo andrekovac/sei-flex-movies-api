@@ -2,6 +2,26 @@ import Movie from '../models/movie.js'
 import Actor from '../models/actor.js'
 import { removedAdded } from './helpers.js'
 
+async function searchMovies(req, res, next) {
+  try {
+    const { q } = req.query
+    console.log('HEY ROBIN, Q IS: ', q)
+    const regex = new RegExp(q, 'i')
+
+    const query = Movie.find()
+    query.where({
+      $or: [{ title: regex }, { description: regex }],
+    })
+
+    const movies = await query
+
+    console.log('HEY ROBIN, MOVIES IS: ', movies)
+    return res.status(200).json(movies)
+  } catch (err) {
+    next(err)
+  }
+}
+
 async function getAllMovies(_req, res, next) {
   try {
     const movies = await Movie.find()
@@ -72,7 +92,7 @@ async function deleteMovie(req, res, next) {
     }
 
     // we want to ask mongoose if createdBy and currentUser match
-    if (!movie.createdBy.equals(req.currentUser._id)) {
+    if (!req.isUserAdmin && !movie.createdBy.equals(req.currentUser._id)) {
       return res.status(401).send({ message: 'Unauthorized action' })
     }
 
@@ -103,7 +123,7 @@ async function updateMovie(req, res, next) {
     }
 
     // we want to ask mongoose if createdBy and currentUser match
-    if (!movie.createdBy.equals(req.currentUser._id)) {
+    if (!req.isUserAdmin && !movie.createdBy.equals(req.currentUser._id)) {
       return res.status(401).send({ message: 'Unauthorized action' })
     }
 
@@ -138,4 +158,5 @@ export default {
   deleteMovie,
   updateMovie,
   getAllActorsForMovie,
+  searchMovies,
 }

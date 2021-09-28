@@ -9,6 +9,19 @@ export const getAllMovies = async () => {
   return data
 }
 
+export const searchMovies = async (query) => {
+  const options = {
+    method: 'GET',
+    url: `/api/search`,
+    params: {
+      q: query,
+    },
+  }
+
+  const { data } = await axios.request(options)
+  return data
+}
+
 export const createMovies = async (newMovie) => {
   const options = {
     method: 'POST',

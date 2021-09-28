@@ -8,6 +8,8 @@ import secureRoute from '../middleware/secureRoute.js'
 // Router is reponsible for which routes are answered by which controllers
 const router = express.Router()
 
+router.route('/search').get(moviesController.searchMovies)
+
 // base URL of this is determined by api
 // here we handle everything that comes after that base
 router
@@ -43,6 +45,10 @@ router
 
 router.route('/actors/:id/movies').get(actorsController.getAllMoviesForActor)
 router.route('/movies/:id/actors').get(moviesController.getAllActorsForMovie)
+
+router.route('/admin/users').get(secureRoute, userController.getAllUsers)
+router.route('/admin/promote').post(secureRoute, userController.promoteUser)
+router.route('/admin/demote').post(secureRoute, userController.demoteUser)
 
 router.route('/register').post(userController.registerUser)
 
