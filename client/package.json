@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production --env NODE_ENV=production",
     "start:client": "webpack-dev-server --mode=development --env NODE_ENV=local",
-    "start": "start:client"
+    "start": "yarn start:client"
   },
   "author": "",
   "license": "ISC",

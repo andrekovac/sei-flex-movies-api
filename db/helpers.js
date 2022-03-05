@@ -6,7 +6,7 @@ export function connectDb() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false,
+    // useFindAndModify: false,
   }
   return mongoose.connect(dbURI, opts)
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import Home from './Home.js'
 
 import '../styles/style.scss'
@@ -15,7 +15,7 @@ const App = () => (
       <Link style={{ padding: 5 }} to="/all">
         All Movies
       </Link>
-      <Link style={{ padding: 5 }} to="/seach">
+      <Link style={{ padding: 5 }} to="/search">
         Search
       </Link>
     </nav>
