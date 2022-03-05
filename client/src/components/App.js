@@ -8,11 +8,24 @@ import Search from './Search.js'
 
 const App = () => (
   <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/all" component={AllMovies} />
-      <Route path="/search" component={Search} />
-    </Switch>
+    <nav>
+      <Link style={{ padding: 5 }} to="/">
+        Home
+      </Link>
+      <Link style={{ padding: 5 }} to="/all">
+        All Movies
+      </Link>
+      <Link style={{ padding: 5 }} to="/seach">
+        Search
+      </Link>
+    </nav>
+    <main>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/all" component={AllMovies} />
+        <Route path="/search" component={Search} />
+      </Switch>
+    </main>
   </BrowserRouter>
 )
 

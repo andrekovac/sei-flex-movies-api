@@ -6,6 +6,7 @@ export const moviesSeedData = [
     releaseYear: 1992,
     genre: 'Comedy',
     comments: [],
+    // createdBy:
   },
   {
     title: 'Die Hard',

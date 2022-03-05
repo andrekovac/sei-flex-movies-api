@@ -4,11 +4,10 @@ To run the api, firstly ensure MongoDB is installed and running locally. To see 
 
 # Mongo DB and Aliases
 
-add an alias to the .zshrc file to be able to create shortcuts for commands
+add an alias to the `.zshrc` file to be able to create shortcuts for commands
 
-to start mongo: `alias startmongo="brew services start mongodb-community@5.0"`
-
-to stop mongo: `alias killmongo="brew services stop mongodb-community@5.0"`
+- to start mongo: `alias startmongo="brew services start mongodb-community"`
+- to stop mongo: `alias killmongo="brew services stop mongodb-community@"`
 
 Once the database is running locally:
 
@@ -16,13 +15,13 @@ Once the database is running locally:
 2. Seed the database - `npm run seed`
 3. Start the server - `npm run start:server`
 
-<em>It may help to have nodemon installed globally on your machine</em>
+<em>It may help to have `nodemon` installed globally on your machine</em>
 
 `npm i -g nodemon`
 
 Once the server is running and successfully connected to the database, you will be able to test making requests to the api using [postman]('https://www.postman.com/downloads/).
 
-Try sending a request to `http://localhost:4000/api/movies` and you should see data returned
+Try sending a request to `http://localhost:3000/api/movies` and you should see data returned
 
 ## Lesson 9 Instructions:
 
@@ -32,3 +31,7 @@ Try sending a request to `http://localhost:4000/api/movies` and you should see d
 4. Put them in groups
 5. One person should push their classwork into a git repo and all of them should pull it down
 6. Get them to write tickets and work together to start creating a fontend
+
+## Hosting on Heroku (backend) + MongoDB Atlas (database)
+
+Use [this article](https://coding-boot-camp.github.io/full-stack/mongodb/deploy-with-heroku-and-mongodb-atlas)
