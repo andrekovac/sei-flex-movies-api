@@ -23,11 +23,12 @@ const movieSchema = new mongoose.Schema({
   genre: String,
   comments: [commentSchema],
   actors: [{ type: mongoose.Types.ObjectId, ref: 'Actor' }],
-  // createdBy: {
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: 'User',
-  //   required: true,
-  // },
+
+  createdBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 })
 
 movieSchema.plugin(mongooseUniqueValidator)
