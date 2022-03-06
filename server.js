@@ -7,7 +7,6 @@ import router from './config/router.js'
 const app = express()
 
 app.use(express.json())
-app.use('/api', router)
 
 const whitelist = ['http://localhost:8081', 'http://localhost:3000']
 const corsOptions = {
@@ -21,12 +20,14 @@ const corsOptions = {
 
   credentials: true,
 }
-app.use(cors(corsOptions))
+app.use('/api', router)
 
 async function startServer() {
   try {
     await connectDb()
     console.log('🤖 Mongoose is connected')
+    app.use(cors())
+
     app.listen(port, () => console.log(`🤖 Listening on Port: ${port}`))
   } catch (err) {
     console.log('🤖 Oh no something went wrong')
