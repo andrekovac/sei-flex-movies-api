@@ -1,6 +1,31 @@
+import Cors from 'cors'
+
 import Movie from '../models/movie.js'
 import Actor from '../models/actor.js'
 import { removedAdded } from './helpers.js'
+
+// Initializing the cors middleware
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+})
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(
+  req: BlitzApiRequest,
+  res: BlitzApiResponse,
+  fn: (...args: any[]) => void
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: unknown) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}
 
 async function searchMovies(req, res, next) {
   try {
@@ -25,6 +50,10 @@ async function searchMovies(req, res, next) {
 async function getAllMovies(_req, res, next) {
   try {
     const movies = await Movie.find()
+
+    // Run the middleware
+    await runMiddleware(req, res, cors)
+
     return res.status(200).json(movies)
   } catch (err) {
     next(err)

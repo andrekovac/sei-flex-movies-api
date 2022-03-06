@@ -26,7 +26,6 @@ async function startServer() {
   try {
     await connectDb()
     console.log('🤖 Mongoose is connected')
-    app.use(cors())
 
     app.listen(port, () => console.log(`🤖 Listening on Port: ${port}`))
   } catch (err) {
