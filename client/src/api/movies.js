@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:3000'
+const herokuUrl = 'https://ga-movies-app.herokuapp.com/'
 
 export const getAllMovies = async () => {
-  const options = { method: 'GET', url: `/api/movies` }
+  const options = { method: 'GET', url: `${herokuUrl}/api/movies` }
 
   const { data } = await axios.request(options)
   return data
