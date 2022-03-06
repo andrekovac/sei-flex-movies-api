@@ -1,32 +1,11 @@
-import Cors from 'cors'
-
 import Movie from '../models/movie.js'
 import Actor from '../models/actor.js'
-import { removedAdded } from './helpers.js'
-
-// Initializing the cors middleware
-const cors = Cors({
-  methods: ['GET', 'HEAD'],
-})
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(req, res, fn) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
-
-      return resolve(result)
-    })
-  })
-}
+import { removedAdded, cors, runMiddleware } from './helpers.js'
 
 async function searchMovies(req, res, next) {
   try {
     const { q } = req.query
-    console.log('HEY ROBIN, Q IS: ', q)
+    console.log('query', q)
     const regex = new RegExp(q, 'i')
 
     const query = Movie.find()
@@ -36,7 +15,9 @@ async function searchMovies(req, res, next) {
 
     const movies = await query
 
-    console.log('HEY ROBIN, MOVIES IS: ', movies)
+    await runMiddleware(req, res, cors)
+
+    console.log('found movies', movies)
     return res.status(200).json(movies)
   } catch (err) {
     next(err)
@@ -47,7 +28,6 @@ async function getAllMovies(req, res, next) {
   try {
     const movies = await Movie.find()
 
-    // Run the middleware
     await runMiddleware(req, res, cors)
 
     return res.status(200).json(movies)
@@ -60,6 +40,9 @@ async function getAllActorsForMovie(req, res, next) {
   try {
     const { id } = req.params
     const movie = await Movie.findById(id).populate('actors')
+
+    await runMiddleware(req, res, cors)
+
     return res.status(200).json(movie.actors)
   } catch (err) {
     next(err)
@@ -80,6 +63,8 @@ async function createMovie(req, res, next) {
       { $push: { movies: newMovie._id } }
     )
 
+    await runMiddleware(req, res, cors)
+
     return res.status(201).json(newMovie)
   } catch (err) {
     next(err)
@@ -97,6 +82,8 @@ async function getMovie(req, res, next) {
     if (!movie) {
       return res.status(404).send({ message: 'Movie does not exist' })
     }
+
+    await runMiddleware(req, res, cors)
 
     return res.status(200).json(movie)
   } catch (err) {
@@ -128,6 +115,8 @@ async function deleteMovie(req, res, next) {
       { $pull: { movies: movie._id } }
     )
     await movie.remove()
+
+    await runMiddleware(req, res, cors)
 
     return res.status(200).json(movie)
   } catch (err) {
@@ -169,6 +158,8 @@ async function updateMovie(req, res, next) {
       { _id: addedActors },
       { $push: { movies: savedMovie._id } }
     )
+
+    await runMiddleware(req, res, cors)
 
     return res.status(200).json(savedMovie)
   } catch (err) {

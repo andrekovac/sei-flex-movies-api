@@ -20,4 +20,4 @@ async function promoteRjk() {
   disconnectDb()
 }
 
-promoteRjk()
+// promoteRjk()
