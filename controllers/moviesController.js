@@ -11,13 +11,9 @@ const cors = Cors({
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
-function runMiddleware(
-  req: BlitzApiRequest,
-  res: BlitzApiResponse,
-  fn: (...args: any[]) => void
-) {
+function runMiddleware(req, res, fn) {
   return new Promise((resolve, reject) => {
-    fn(req, res, (result: unknown) => {
+    fn(req, res, (result) => {
       if (result instanceof Error) {
         return reject(result)
       }
@@ -47,7 +43,7 @@ async function searchMovies(req, res, next) {
   }
 }
 
-async function getAllMovies(_req, res, next) {
+async function getAllMovies(req, res, next) {
   try {
     const movies = await Movie.find()
 
