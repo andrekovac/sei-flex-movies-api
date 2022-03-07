@@ -2,12 +2,16 @@ import jwt from 'jsonwebtoken'
 
 import User from '../models/user.js'
 import { secret } from '../config/environment.js'
+import { cors, runMiddleware } from './helpers.js'
 
 // ! Added a new controller function to create a user
 async function registerUser(req, res, next) {
   const body = req.body
   try {
     const user = await User.create({ ...body, isAdmin: false })
+
+    await runMiddleware(req, res, cors)
+
     res.status(201).send(user)
   } catch (err) {
     next(err)
@@ -24,6 +28,9 @@ async function promoteUser(req, res, next) {
     const user = await User.findOne({ _id: body.userId })
     user.set({ isAdmin: true })
     user.save()
+
+    await runMiddleware(req, res, cors)
+
     res.status(201).send(user)
   } catch (err) {
     next(err)
@@ -37,6 +44,9 @@ async function getAllUsers(req, res, next) {
     }
 
     const users = await User.find()
+
+    await runMiddleware(req, res, cors)
+
     res.status(201).send(users)
   } catch (err) {
     next(err)
@@ -53,6 +63,9 @@ async function demoteUser(req, res, next) {
     const user = await User.findOne({ _id: body.userId })
     user.set({ isAdmin: false })
     user.save()
+
+    await runMiddleware(req, res, cors)
+
     res.status(201).send(user)
   } catch (err) {
     next(err)
