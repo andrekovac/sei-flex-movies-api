@@ -5,19 +5,28 @@ import actorsController from '../controllers/actorsController.js'
 import userController from '../controllers/userController.js'
 import secureRoute from '../middleware/secureRoute.js'
 
-// Router is reponsible for which routes are answered by which controllers
+/**
+ * Router is reponsible for which routes are answered by which controllers
+ */
 const router = express.Router()
 
 router.route('/search').get(moviesController.searchMovies)
 
-// base URL of this is determined by api
-// here we handle everything that comes after that base
+/**
+ * The base URL (e.g. `https://ga-movies-app.herokuapp.com/api`) is determined by the API.
+ * Here we handle everything that comes after that base, i.e. `https://ga-movies-app.herokuapp.com/api/movies`
+ */
 router
+  // Here the backend will match any requests coming in on the `/movies' route
   .route('/movies')
+  // if the request is a 'GET' request it will call the 'getAllMovies' function of the 'moviesController'
   .get(moviesController.getAllMovies)
+  // if the request is a 'POST' request it will call the 'getAllMovies' function of the 'createMovie'
   .post(secureRoute, moviesController.createMovie)
 
 router
+  // Here the backend will match any requests coming in on the `/movies/:id' route
+  // This matches any id, e.g. `/movies/213g2h3g12367231n2g3v0d97`
   .route('/movies/:id')
   .get(moviesController.getMovie)
   .put(secureRoute, moviesController.updateMovie)

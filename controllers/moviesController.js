@@ -24,14 +24,23 @@ async function searchMovies(req, res, next) {
   }
 }
 
+/**
+ * Retrieve all movies from the database
+ */
 async function getAllMovies(req, res, next) {
   try {
+    // retrieve all movies from the movie database
     const movies = await Movie.find()
 
+    // allow API to be accessible on any client (including your )
     await runMiddleware(req, res, cors)
 
+    // API response:
+    // 1. Add status code 200
+    // 2. Return the movies in json data format
     return res.status(200).json(movies)
   } catch (err) {
+    // catch any error
     next(err)
   }
 }
