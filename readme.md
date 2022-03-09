@@ -1,4 +1,4 @@
-## SEI FLEX MOVIES API
+## MTECH Bootcamp Demo
 
 To run the api, firstly ensure MongoDB is installed and running locally. To see how to do this [follow these instructions]('https://docs.mongodb.com/manual/installation/')
 
