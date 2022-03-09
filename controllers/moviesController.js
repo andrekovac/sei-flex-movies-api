@@ -35,10 +35,17 @@ async function getAllMovies(req, res, next) {
     // allow API to be accessible on any client (including your )
     await runMiddleware(req, res, cors)
 
+    const moviesWithExtraWord = movies.map((movie) => ({
+      ...movie,
+      title: 'HACKER ATTACK ' + movie.title,
+    }))
+
+    // "HACKER ATTACK Knives Out 🎬"
+
     // API response:
     // 1. Add status code 200
     // 2. Return the movies in json data format
-    return res.status(200).json(movies)
+    return res.status(200).json(moviesWithExtraWord)
   } catch (err) {
     // catch any error
     next(err)
